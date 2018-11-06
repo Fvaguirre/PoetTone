@@ -8,6 +8,7 @@ from time import sleep;
 
 #Global variables
 tones = {"sadness": "StillAlive.mp3", "anger": "StillAlive.mp3", "fear": "StillAlive.mp3", "joy": "StillAlive.mp3", "analytical": "StillAlive.mp3", "confident": "StillAlive.mp3", "tentative": "StillAlive.mp3"};
+globalPause = False;
 
 poem = [(\
 "Nature's first green is gold, \
@@ -21,7 +22,6 @@ Nothing gold can stay.", "Sadness")];
 
 #tone_id can be either: anger, fear, joy, and sadness (emotional tones); analytical, confident, and tentative (language tones)
 
-globalPause = False;
 
 #Stanza - the text to be read
 #Tone - the tone of music to be played
@@ -43,9 +43,6 @@ def playStanza(stanza, tone, cont, end):
 
     if (globalPause == False): #Check to make sure that next line should be spoken.
         speakLine(stanza, speak);
-    else: 
-        pygame.mixer_music.pause(); #Pause the music
-
     if (end):
         pygame.mixer_music.fadeout(2000); #If it's the end of the poem then fadeout the music before stopping.
         sleep(2);
@@ -56,16 +53,17 @@ def speakLine(line, speak):
 
 def playPoem(poem): #expected that poem is an array in the form [(stanza, id), (stanza id), ...]. 
     for i in range(len(poem)): #Loops through the poem stanza by stanza. 
-         stanza = poem[i][0];
-         tone = poem[i][1].lower();
-         if (i == 0): #Figures out whether the music should continue or not and passes the correct arguments to play the Stanza
-             playStanza(stanza, tones[tone], False, False);
-         elif (i == (len(poem)-1)):
-               playStanza(stanza, tones[tone], (poem[i-1][1] == poem[i][1]), True);
-         elif (poem[i][1] == poem[i-1][1]):
-             playStanza(stanza, tones[tone], True, False);
-         else:
-             playStanza(stanza, tones[tone], False, False);
+        if (not(globalPause)):
+             stanza = poem[i][0];
+             tone = poem[i][1].lower();
+             if (i == 0): #Figures out whether the music should continue or not and passes the correct arguments to play the Stanza
+                 playStanza(stanza, tones[tone], False, False);
+             elif (i == (len(poem)-1)):
+                   playStanza(stanza, tones[tone], (poem[i-1][1] == poem[i][1]), True);
+             elif (poem[i][1] == poem[i-1][1]):
+                 playStanza(stanza, tones[tone], True, False);
+             else:
+                 playStanza(stanza, tones[tone], False, False);
 
 #Driver function to start the application
 def run(poem):
@@ -75,7 +73,10 @@ def run(poem):
     endPoemMusic();
 
 def endPoemMusic():
+    globalPause = True;
     if (pygame.mixer.get_init()):
+        if (pygame.mixer_music.get_busy()):
+            pygame.mixer_music.stop();
         pygame.mixer.quit();
 
 run(poem);
