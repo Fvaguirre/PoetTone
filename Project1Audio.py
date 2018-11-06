@@ -7,7 +7,7 @@ from time import sleep;
 #Find Songs
 
 #Global variables
-tones = {"Sadness": "StillAlive.mp3", "Anger": "StillAlive.mp3", "Fear": "StillAlive.mp3", "Joy": "StillAlive.mp3", "Analytical": "StillAlive.mp3", "Confident": "StillAlive.mp3", "Tentative": "StillAlive.mp3"};
+tones = {"sadness": "StillAlive.mp3", "anger": "StillAlive.mp3", "fear": "StillAlive.mp3", "joy": "StillAlive.mp3", "analytical": "StillAlive.mp3", "confident": "StillAlive.mp3", "tentative": "StillAlive.mp3"};
 
 poem = [(\
 "Nature's first green is gold, \
@@ -57,7 +57,7 @@ def speakLine(line, speak):
 def playPoem(poem): #expected that poem is an array in the form [(stanza, id), (stanza id), ...]. 
     for i in range(len(poem)): #Loops through the poem stanza by stanza. 
          stanza = poem[i][0];
-         tone = poem[i][1];
+         tone = poem[i][1].lower();
          if (i == 0): #Figures out whether the music should continue or not and passes the correct arguments to play the Stanza
              playStanza(stanza, tones[tone], False, False);
          elif (i == (len(poem)-1)):
