@@ -69,7 +69,13 @@ def playPoem(poem): #expected that poem is an array in the form [(stanza, id), (
 
 #Driver function to start the application
 def run(poem):
+    endPoemMusic();
     pygame.mixer.init();
     playPoem(poem);
+    endPoemMusic();
+
+def endPoemMusic():
+    if (pygame.mixer.get_init()):
+        pygame.mixer.quit();
 
 run(poem);
