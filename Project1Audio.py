@@ -7,16 +7,17 @@ from time import sleep;
 #Find Songs
 
 #Global variables
-tones = {"Sad": "StillAlive.mp3", "Anger": "StillAlive.mp3"};
+tones = {"Sadness": "StillAlive.mp3", "Anger": "StillAlive.mp3", "Fear": "StillAlive.mp3", "Joy": "StillAlive.mp3", "Analytical": "StillAlive.mp3", "Confident": "StillAlive.mp3", "Tentative": "StillAlive.mp3"};
+
 poem = [(\
 "Nature's first green is gold, \
-Her hardest hue to hold.", "Sad"),("\
+Her hardest hue to hold.", "Sadness"),("\
 Her early leaf's a flower; \
-But only so an hour.", "Sad"),("\
+But only so an hour.", "Sadness"),("\
 Then leaf subsides to leaf,", "Anger"),(" \
 So Eden sank to grief, \
 So dawn goes down to day. \
-Nothing gold can stay.", "Sad")];
+Nothing gold can stay.", "Sadness")];
 
 #tone_id can be either: anger, fear, joy, and sadness (emotional tones); analytical, confident, and tentative (language tones)
 
