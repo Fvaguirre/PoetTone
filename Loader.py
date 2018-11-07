@@ -91,6 +91,7 @@ def poemLoader(poem):
     num_to_tone = analyzePoem(nums_to_stanzas)
     # Combine nums_to_stanza and num_to_tone to a list of tuples:  [( string of stanza text,
     # string of dominant tone) ...]
+    print(num_to_tone)
     text_tone_list = []
     for key, val in nums_to_stanzas.items():
         text_tone_list.append((val, num_to_tone.get(key)))
