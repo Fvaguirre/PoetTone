@@ -1,3 +1,4 @@
+import Audio
 import os
 from watson_developer_cloud import ToneAnalyzerV3
 
@@ -13,11 +14,11 @@ def loadPoem():
         exit()
 
 
-def parsePoem(file):
+def parsePoem(poem):
     count = 1
     stanza_num_to_text = dict()
     curr_stanza = ""
-    for line in file:
+    for line in poem.splitlines(keepends=True):
         if line == "\n":
             stanza_num_to_text[count] = curr_stanza
             count += 1
@@ -53,13 +54,14 @@ def analyzeStanza(nums_to_response):
             # TODO: maybe consider more than the most dominant tone if more than one dominant tones in stanza
     return nums_to_tone
 
+# REPLACE THIS CODE WHEN SUBMITTING
 def analyzePoem(nums_to_stanzas):
     nums_to_response = dict()
 
     tone_analyzer = ToneAnalyzerV3(
         version='2017-09-21',
-        iam_apikey='Your API key',
-        url='Your URL'
+        iam_apikey='vEr9u5EEgQAnviO7idpo71FW7tC95ksrHgDYMMX7iLuN',
+        url='https://gateway-wdc.watsonplatform.net/tone-analyzer/api'
     )
     # Loop through each stanza and query API for tone analysis response
     for key, val in nums_to_stanzas.items():
@@ -82,13 +84,9 @@ def analyzePoem(nums_to_stanzas):
     return results
 
 
-if __name__ == '__main__':
-    # Open the selected poem and load into file
-    file = loadPoem()
+def poemLoader(poem):
     # Maps stanza number to stanza text [1...n]
-    nums_to_stanzas = parsePoem(file)
-    # Close the opened file
-    file.close()
+    nums_to_stanzas = parsePoem(poem)
     # Analyze the tones of the poem and map the dominant tone to stanza number
     num_to_tone = analyzePoem(nums_to_stanzas)
     # Combine nums_to_stanza and num_to_tone to a list of tuples:  [( string of stanza text,
@@ -96,7 +94,30 @@ if __name__ == '__main__':
     text_tone_list = []
     for key, val in nums_to_stanzas.items():
         text_tone_list.append((val, num_to_tone.get(key)))
+    Audio.run(text_tone_list)
 
-
-
-
+# a = """Do not go gentle into that good night,
+# Old age should burn and rave at close of day;
+# Rage, rage against the dying of the light.
+#
+# Though wise men at their end know dark is right,
+# Because their words had forked no lightning they
+# Do not go gentle into that good night.
+#
+# Good men, the last wave by, crying how bright
+# Their frail deeds might have danced in a green bay,
+# Rage, rage against the dying of the light.
+#
+# Wild men who caught and sang the sun in flight,
+# And learn, too late, they grieved it on its way,
+# Do not go gentle into that good night.
+#
+# Grave men, near death, who see with blinding sight
+# Blind eyes could blaze like meteors and be gay,
+# Rage, rage against the dying of the light.
+#
+# And you, my father, there on the sad height,
+# Curse, bless, me now with your fierce tears, I pray.
+# Do not go gentle into that good night.
+# Rage, rage against the dying of the light."""
+# poemLoader(a)

@@ -1,6 +1,7 @@
 import tkinter as tk
-import threading #?????????
-import time
+import threading
+import Audio
+import Loader
 import os
 
 DEF_X = 1200
@@ -8,17 +9,39 @@ DEF_Y = 700
 DEF_L = DEF_X - 150
 TEXT_FONT = "Baskerville old face"
 TEXT_SIZE = 15
-POEMFOLDER = "poems/"
+POEMFOLDER = "Poems/"
+
+class PoemThread(threading.Thread):
+    _stopevent = None
+    poem = None
+
+    def __init__(self, poem):
+        self._stopevent = threading.Event()
+        self.poem = poem
+        super(PoemThread, self).__init__()
+
+    def run(self):
+        if not self._stopevent.isSet():
+            Loader.poemLoader(self.poem)
+
+    def join(self, timeout=None):
+        Audio.endPoemMusic()
+        self._stopevent.set()
+        threading.Thread.join(self, timeout)
 
 class App(tk.Frame):
     cur_line = 0
+    thread = None
+
     def __init__(self, root=None):
         poems = {}
         # Initialize poem dictionary
         def Poems():
             for file in os.listdir(POEMFOLDER):
                 if file.endswith(".txt"):
-                    poems[file.split(".")[0]] = open(POEMFOLDER + file, "r", encoding="UTF-8").read()
+                    f = open(POEMFOLDER + file, "r", encoding="UTF-8")
+                    poems[file.split(".")[0]] = f.read()
+                    f.close()
 
         # Initialization
         tk.Frame.__init__(self, root)
@@ -72,23 +95,34 @@ class App(tk.Frame):
         dropdown.pack(fill=tk.X, anchor=tk.N, pady=20)
 
         # Inserts text with highlighted index in poem
-        def setText(poem, ind):
-            p = poem.split("\n")
-            for i in range(0, len(p)):
-                if i == ind:
-                    text.insert(tk.END, p[i]+"\n", "center-highlight")
-                else:
-                    text.insert(tk.END, p[i]+"\n", "center")
+        def setText(poem):
+            text.insert(tk.END, poem, "center")
+            # TODO: MULTITHREADED HIGHLIGHTING
+            # p = poem.split("\n")
+            # for i in range(0, len(p)):
+            #     if i == ind:
+            #         text.insert(tk.END, p[i]+"\n", "center-highlight")
+            #     else:
+            #         text.insert(tk.END, p[i]+"\n", "center")
 
         # Change poem
-        def changePoem(ind=0, reset_cur_line = True):
+        def changePoem(reset_cur_line = True):
             if reset_cur_line:
                 self.cur_line = 0
+
             if var.get() in poems:
+                # Set text
                 text.config(state=tk.NORMAL)
                 text.delete(1.0, tk.END)
-                setText(poems[var.get()], ind)
+                # setText(poems[var.get()], ind)
+                setText(poems[var.get()])
                 text.config(state=tk.DISABLED)
+
+                # Kill old thread and spawn new
+                if not self.thread is None:
+                    self.thread.join()
+                self.thread = PoemThread(poems[var.get()])
+                self.thread.start()
 
         ddButton = tk.Button(right_frame, text="Change Poem", font=("High Tower Text", 14),
                              command=changePoem, bg="white", height=2)
@@ -101,14 +135,6 @@ class App(tk.Frame):
         # Set up window
         left_frame.grid(row=0, column=0, sticky=tk.NW)
         right_frame.grid(row=0, column=1, sticky=tk.NE)
-
-        # Set highlight
-        def newHighLight():
-            if var.get() in poems:
-                changePoem(self.cur_line % len(poems[var.get()].split("\n")), False)
-            self.cur_line += 1
-            self.listenID = self.after(1000, newHighLight)
-        self.listenID = self.after(1000, newHighLight)
 
         # Main loop
         self.mainloop()
