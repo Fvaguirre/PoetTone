@@ -139,6 +139,10 @@ class App(tk.Frame):
         # Main loop
         self.mainloop()
 
+    def __delete__(self, instance):
+        self.thread.join()
+        self.destroy()
+
 def main():
     # Main window
     window = tk.Tk()
