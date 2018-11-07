@@ -7,12 +7,17 @@ from time import sleep;
 #Find Songs
 
 #Global variables
-tones = {"sadness": "StillAlive.mp3", "anger": "StillAlive.mp3", "fear": "StillAlive.mp3", "joy": "StillAlive.mp3", "analytical": "StillAlive.mp3", "confident": "StillAlive.mp3", "tentative": "StillAlive.mp3"};
-globalPause = False;
+tones = {"sadness": "Songs\Meydn_-_10_-_Story.mp3", 
+         "anger": "StillAlive.mp3", 
+         "fear": "StillAlive.mp3", 
+         "joy": "Songs\Dee_Yan-Key_-_03_-_Arrival_of_the_Ghosts.mp3", 
+         "analytical": "StillAlive.mp3", 
+         "confident": "StillAlive.mp3", 
+         "tentative": "StillAlive.mp3"};
 
 poem = [(\
 "Nature's first green is gold, \
-Her hardest hue to hold.", "Sadness"),("\
+Her hardest hue to hold.", "joy"),("\
 Her early leaf's a flower; \
 But only so an hour.", "Sadness"),("\
 Then leaf subsides to leaf,", "Anger"),(" \
@@ -41,8 +46,8 @@ def playStanza(stanza, tone, cont, end):
         if (False == pygame.mixer_music.get_busy()):
             pygame.mixer_music.rewind(); #Check to make sure the music is still playing and hasn't run out, if it has, replay it. 
 
-    if (globalPause == False): #Check to make sure that next line should be spoken.
-        speakLine(stanza, speak);
+    speakLine(stanza, speak); #Say the next stanza
+    
     if (end):
         pygame.mixer_music.fadeout(2000); #If it's the end of the poem then fadeout the music before stopping.
         sleep(2);
@@ -53,7 +58,7 @@ def speakLine(line, speak):
 
 def playPoem(poem): #expected that poem is an array in the form [(stanza, id), (stanza id), ...]. 
     for i in range(len(poem)): #Loops through the poem stanza by stanza. 
-        if (not(globalPause)):
+        if (pygame.mixer.get_init()):
              stanza = poem[i][0];
              tone = poem[i][1].lower();
              if (i == 0): #Figures out whether the music should continue or not and passes the correct arguments to play the Stanza
@@ -73,7 +78,6 @@ def run(poem):
     endPoemMusic();
 
 def endPoemMusic():
-    globalPause = True;
     if (pygame.mixer.get_init()):
         if (pygame.mixer_music.get_busy()):
             pygame.mixer_music.stop();

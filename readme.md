@@ -13,3 +13,8 @@ PoetTone is an application that enhances poetry. With PoetTone poetry is given s
 2. IBM Watson Developer Cloud
 3. Pygame
 4. PyWin32
+
+
+##Music Credits
+Story by Meydän - http://freemusicarchive.org/music/Meydan/Havor/10-_Story_1090
+Arrival of the Ghosts by Dee Yan-Key - http://freemusicarchive.org/music/Dee_Yan-Key/just_a_dream/03--Dee_Yan-Key-Arrival_of_the_Ghosts
