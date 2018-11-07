@@ -33,24 +33,27 @@ def parsePoem(poem):
 
 def analyzeStanza(nums_to_response):
     nums_to_tone = dict()
+    last_key = 0
     for key, val in nums_to_response.items():
         # Stanza_tones is a list of dictionaries where each internal dictionary represents a dominant tone within
         # the stanza and has the form {'score: float', 'tone_id' : str, 'tone_name' : str}
         # tone_id can be either: anger, fear, joy, and sadness (emotional tones); analytical, confident, and
         # tentative (language tones)
         stanza_tones = val.get('document_tone').get('tones')
+        print(stanza_tones)
         # Sentence_tones is a list of dictionaries where each internal dictionary represents a sentence(line)
         # within the given stanza and has the form: {'sentence_id' : int, 'text' : str, 'tones' : [{'score': float,
         # 'tone_id' : str, 'tone_name' : str} ... ]}
         sentence_tones = val.get('sentence_tones')
 
-        if len(stanza_tones) == 0:
-             count = len(sentence_tones)
+        if len(stanza_tones) == 0 or stanza_tones is None:
+            nums_to_tone[key] = nums_to_tone.get(last_key)
             # TODO: gather stanza tone from internal sentences or simply skip this stanza's tone and apply previous
             # stanza's tone
         else:
             # for now only consider the most dominant tone
             nums_to_tone[key] = stanza_tones[0].get('tone_id')
+            last_key = key
             # TODO: maybe consider more than the most dominant tone if more than one dominant tones in stanza
     return nums_to_tone
 
