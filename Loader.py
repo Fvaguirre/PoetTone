@@ -56,14 +56,13 @@ def analyzeStanza(nums_to_response):
             # TODO: maybe consider more than the most dominant tone if more than one dominant tones in stanza
     return nums_to_tone
 
-# REPLACE THIS CODE WHEN SUBMITTING
 def analyzePoem(nums_to_stanzas):
     nums_to_response = dict()
 
     tone_analyzer = ToneAnalyzerV3(
         version='2017-09-21',
-        iam_apikey='vEr9u5EEgQAnviO7idpo71FW7tC95ksrHgDYMMX7iLuN',
-        url='https://gateway-wdc.watsonplatform.net/tone-analyzer/api'
+        iam_apikey='INSERT YOUR IBM TONE ANALYZER API KEY HERE',
+        url='INSERT YOUR IBM TONE ANALYZER URL HERE'
     )
     # Loop through each stanza and query API for tone analysis response
     for key, val in nums_to_stanzas.items():
