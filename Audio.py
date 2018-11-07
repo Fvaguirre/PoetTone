@@ -26,11 +26,11 @@ def playStanza(stanza, tone, cont, end):
     if (cont == False):  # New tone from the previous one
         if (pygame.mixer_music.get_busy()):  # check if there is currently music playing
             pygame.mixer_music.fadeout(2000);
-            sleep(2);
+            sleep(3);
         pygame.mixer_music.load(tone);  # load the new tone, set the volume and then play it.
         pygame.mixer_music.set_volume(.5);
         pygame.mixer_music.play();
-        sleep(3);
+        sleep(2);
     else:  # The tone is the same as the previous one.
         if (False == pygame.mixer_music.get_busy()):
             pygame.mixer_music.rewind();  # Check to make sure the music is still playing and hasn't run out, if it has, replay it.
