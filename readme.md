@@ -3,7 +3,7 @@
 PoetTone is an application that enhances poetry. With PoetTone poetry is given sound! PoetTone uses IBM Watson's [ToneAnalyzer](https://www.ibm.com/watson/services/tone-analyzer/) to analyze a poem's tone by stanza and then match a musical piece to each stanza. The selected poem is then read aloud using Microsoft Speech Engine [Text-to-Speech](https://www.microsoft.com/en-us/download/details.aspx?id=27224) while the application plays the musical piece that matched the poem's tone(s)!
 
 ## Architecture
-![Architecture.png](https://raw.githubusercontent.com/fvaguirre/PoetTone/master/PoetToneArchitecture.png))
+![Architecture.png](https://raw.githubusercontent.com/fvaguirre/PoetTone/master/PoetToneArchitecture.png)
 
 ## Setting Up
 1. Install Python 3
