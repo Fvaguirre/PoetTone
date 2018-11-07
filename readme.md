@@ -9,17 +9,24 @@ PoetTone is an application that enhances poetry. With PoetTone poetry is given s
 1. Install Python 3
 2. Install pip
 3. Install dependencies using pip
-4. Run PoetTone.sh
+4. Install the fonts (Double click the two font files in the Fonts folder)
+5. Run the PoetTone.sh shell script or "python PoetToneGui.py" after cd'ing to the folder in cmd
 
 ## Dependencies
 1. Python 3
 2. IBM Watson Developer Cloud
 3. Pygame
 4. PyWin32
+5. Windows OS
 
+## Using PoetTone
+1. Click on the "Select a Poem!" dropdown menu to select a poem from the Poems folder.
+2. Click on the "Change Poem" button to start reading the poem.
+3. You can import a poem into the Poems folder and click on "Reset Poems" to read a custom poem.
+4. When clicking on Change Poem during a current reading of a poem, please wait for the reading of the current stanza to finish, and the program will automatically begin playing the next poem afterwards.
 
 ## Music Credits
->Story by Meydän - http://freemusicarchive.org/music/Meydan/Havor/10-_Story_1090<br/>
+> Story by Meydän - http://freemusicarchive.org/music/Meydan/Havor/10-_Story_1090<br/>
 > Arrival of the Ghosts by Dee Yan-Key - http://freemusicarchive.org/music/Dee_Yan-Key/just_a_dream/03--Dee_Yan-Key-Arrival_of_the_Ghosts <br/>
 > Inexplicable Fear by Alex Mason - http://freemusicarchive.org/music/Alex_Mason/Red_Numbers/05_1625<br/>
 > The Gray Forest - II The Trap by Aitua - http://freemusicarchive.org/music/Aitua/Elements/13_The_Gray_Forest_-_II_The_Trap<br/>

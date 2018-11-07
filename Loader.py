@@ -40,7 +40,6 @@ def analyzeStanza(nums_to_response):
         # tone_id can be either: anger, fear, joy, and sadness (emotional tones); analytical, confident, and
         # tentative (language tones)
         stanza_tones = val.get('document_tone').get('tones')
-        print(stanza_tones)
         # Sentence_tones is a list of dictionaries where each internal dictionary represents a sentence(line)
         # within the given stanza and has the form: {'sentence_id' : int, 'text' : str, 'tones' : [{'score': float,
         # 'tone_id' : str, 'tone_name' : str} ... ]}
@@ -94,7 +93,6 @@ def poemLoader(poem):
     num_to_tone = analyzePoem(nums_to_stanzas)
     # Combine nums_to_stanza and num_to_tone to a list of tuples:  [( string of stanza text,
     # string of dominant tone) ...]
-    print(num_to_tone)
     text_tone_list = []
     for key, val in nums_to_stanzas.items():
         text_tone_list.append((val, num_to_tone.get(key)))
