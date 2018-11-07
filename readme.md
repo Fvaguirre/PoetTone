@@ -10,7 +10,8 @@ PoetTone is an application that enhances poetry. With PoetTone poetry is given s
 2. Install pip
 3. Install dependencies using pip
 4. Install the fonts (Double click the two font files in the Fonts folder)
-5. Run the PoetTone.sh shell script or "python PoetToneGui.py" after cd'ing to the folder in cmd
+5. Input your personal IBM Watson ToneAnalyzer API key and URL in loader.py
+6. Run the PoetTone.sh shell script or "python PoetToneGui.py" after cd'ing to the folder in cmd
 
 ## Dependencies
 1. Python 3
