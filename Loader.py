@@ -61,8 +61,8 @@ def analyzePoem(nums_to_stanzas):
 
     tone_analyzer = ToneAnalyzerV3(
         version='2017-09-21',
-        iam_apikey='Cf93jovuG-hTfK9yhjM1svqi2l55qW4G5gDT6lIgLvt_',
-        url='https://gateway.watsonplatform.net/tone-analyzer/api'
+        iam_apikey='YOUR API KEY_',
+        url='YOUR URL'
     )
     # Loop through each stanza and query API for tone analysis response
     for key, val in nums_to_stanzas.items():
