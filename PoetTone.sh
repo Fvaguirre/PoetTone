@@ -1,1 +1,2 @@
 python PoetToneGui.py
+$SHELL

@@ -1,0 +1,4 @@
+The task was split into 3 main parts:
+1. Parsing the poem and sending and recieving information from the tone analyzer. - Frank Vega-Aguirre 
+2. Selecting and playing audio based on the tone and working with Text to Speech - Eleanor Little
+3. Creating the GUI to interact with the application and combining all parts of the application. - Brandon Rao
