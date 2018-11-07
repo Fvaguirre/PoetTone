@@ -5,29 +5,15 @@ from time import sleep;
 import threading
 
 # TODO: write up the architecture documentation
-# Start ReadMe (dependencies and such)
-# Find Songs
 
 # Global variables
-tones = {"sadness": "Songs\Meydn_-_10_-_Story.mp3",
-         "anger": "StillAlive.mp3",
-         "fear": "StillAlive.mp3",
-         "joy": "Songs\Dee_Yan-Key_-_03_-_Arrival_of_the_Ghosts.mp3",
-         "analytical": "StillAlive.mp3",
-         "confident": "StillAlive.mp3",
-         "tentative": "StillAlive.mp3"};
-
-poem = [( \
-    "Nature's first green is gold, \
-    Her hardest hue to hold.", "joy"), ("\
-Her early leaf's a flower; \
-But only so an hour.", "Sadness"), ("\
-Then leaf subsides to leaf,", "Anger"), (" \
-So Eden sank to grief, \
-So dawn goes down to day. \
-Nothing gold can stay.", "Sadness")];
-
-
+tones = {"sadness": "Songs\Meydn_-_10_-_Story.mp3", 
+         "anger": "Songs\Meydan_-_03_-_Insomnia_Pt_2.mp3", 
+         "fear": "Songs\Alex_Mason_-_05_-_Inexplicable_Fear.mp3", 
+         "joy": "Songs\Dee_Yan-Key_-_03_-_Arrival_of_the_Ghosts.mp3", 
+         "analytical": "Songs\Aitua_-_08_-_Elements_-_III_Blue_Sky.mp3", 
+         "confident": "Songs\Ketsa_-_07_-_fastlife.mp3", 
+         "tentative": "Songs\Aitua_-_13_-_The_Gray_Forest_-_II_The_Trap.mp3"};
 # tone_id can be either: anger, fear, joy, and sadness (emotional tones); analytical, confident, and tentative (language tones)
 
 
@@ -91,48 +77,6 @@ def endPoemMusic():
         if (pygame.mixer_music.get_busy()):
             pygame.mixer_music.stop();
         pygame.mixer.quit();
-
-# class PoemThread(threading.Thread):
-#     _stopevent = None
-#
-#     def __init__(self, ):
-#         self._stopevent = threading.Event()
-#         super(PoemThread, self).__init__()
-#
-#     def run(self):
-#         while not self._stopevent.isSet():
-#             Loader.poemLoader(poem)
-#
-#     def join(self, timeout=None):
-#         endPoemMusic()
-#         self._stopevent.set()
-#         threading.Thread.join(self, timeout)
-
-
-poem = """Do not go gentle into that good night,
-Old age should burn and rave at close of day;
-Rage, rage against the dying of the light.
-
-Though wise men at their end know dark is right,
-Because their words had forked no lightning they
-Do not go gentle into that good night.
-
-Good men, the last wave by, crying how bright
-Their frail deeds might have danced in a green bay,
-Rage, rage against the dying of the light.
-
-Wild men who caught and sang the sun in flight,
-And learn, too late, they grieved it on its way,
-Do not go gentle into that good night.
-
-Grave men, near death, who see with blinding sight
-Blind eyes could blaze like meteors and be gay,
-Rage, rage against the dying of the light.
-
-And you, my father, there on the sad height,
-Curse, bless, me now with your fierce tears, I pray.
-Do not go gentle into that good night.
-Rage, rage against the dying of the light."""
 
 def main():
     def poemThread():
